@@ -64,16 +64,6 @@ namespace sensor {
         }
 
         [[nodiscard]] std::string ToString() const {
-            //todo: remove and keep only callback
-            ASensorEvent event;
-            while (ASensorEventQueue_getEvents(sensorEventQueue, &event, 1) > 0) {
-                if (event.type == ASENSOR_TYPE_AMBIENT_TEMPERATURE) {
-                    *temperature = event.data[0]; // Value in Celsius
-                } else if (event.type == ASENSOR_TYPE_PRESSURE) {
-                    *pressure = event.data[0]; // Value in hPa (millibars)
-                }
-            }
-
             std::ostringstream ss;
             ss << "Temp: " << *temperature << ", Pres: " << *pressure;
             return ss.str();
